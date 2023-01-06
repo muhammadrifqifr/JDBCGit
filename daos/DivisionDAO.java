@@ -3,9 +3,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-//import java.sql.PreparedStatement;
-//import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.*;
 import com.example.demo.models.Division;
+import com.example.demo.models.Region;
 
 public class DivisionDAO {
     private Connection con;
@@ -21,9 +22,11 @@ public class DivisionDAO {
             ResultSet resultSet = con.prepareStatement(query).executeQuery(); 
             while (resultSet.next()){
                 Division division = new Division();
+                Region region = new Region();
                 division.setId(resultSet.getInt(1));
                 division.setName(resultSet.getString(2));
-                //division.setRegion("East Java");
+                division.setRegion(region);
+                region.setName(resultSet.getString(3));
                 divisions.add(division);
                 //System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2));
             }
