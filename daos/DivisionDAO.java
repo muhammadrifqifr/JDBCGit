@@ -23,7 +23,7 @@ public class DivisionDAO {
                 Division division = new Division();
                 division.setId(resultSet.getInt(1));
                 division.setName(resultSet.getString(2));
-                division.setName(resultSet.getString(3));
+                //division.setRegion("East Java");
                 divisions.add(division);
                 //System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2));
             }
