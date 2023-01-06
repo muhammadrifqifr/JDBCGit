@@ -3,6 +3,8 @@ package com.example.demo.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.daos.DivisionDAO;
@@ -19,6 +21,42 @@ public class DivisionController {
     public String index(Model model){
         model.addAttribute( "divisions", divisionDAO.getAll());
         return "division/index";
+    }
+
+    //CREATE
+    //GET
+    @GetMapping(value = {"form", "form/{id}"})
+    public String getById(@PathVariable(required = false) Integer id, Model model){
+        if (id != null){
+            model.addAttribute("division", divisionDAO.getById(id));
+        } else {
+            model.addAttribute("division", new Division());
+        }
+        return "division/form";
+    }
+
+    //POST
+    @PostMapping("save")
+    public String save(@Nullable Division division){
+        Boolean result; 
+        if(division.getId() != null){
+            result = divisionDAO.update(division);
+        } else {
+            result = divisionDAO.insert(division);
+        }
+        if (result){
+            return "redirect:/division";
+        } else {
+            return "division/form";
+        }
+    }
+
+    //DELETE
+    //POST
+    @PostMapping(value = {"delete/{id}"})
+    public String delete(@PathVariable(required = false) Integer id){
+        divisionDAO.delete(id);
+        return "redirect:/division";
     }
 }
     // GET 
