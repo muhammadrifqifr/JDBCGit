@@ -15,12 +15,9 @@ public class Division {
     @Column(name = "name", nullable = false)
     private String name;
     
-   
     @ManyToOne
-    @JoinColumn(name = "region_Id")
+    @JoinColumn(name = "regionId", referencedColumnName = "id")
     private Region region;
-
-    // Set<RelationRegDiv> relations;
 
     public void setId(Integer id){
         this.id = id;
