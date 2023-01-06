@@ -64,7 +64,7 @@ public class RegionController {
 
     //UPDATE
         //GET
-    // @GetMapping (value = {"formEdit/{id}"})
+    // @GetMapping (value = {"form/{id}"})
     // public String update(@PathVariable(required = false) Integer id, Model model){
     //     // dummy tidak pake method get by id
     //     // Region region = new Region();
