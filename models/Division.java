@@ -1,28 +1,47 @@
-package models;
+package com.example.demo.models;
 
+// import java.util.Set;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tb_m_division")
 public class Division {
-    private int divisionId;
-    private String divisionName;
-    private int regionId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    
+    @Column(name = "name", nullable = false)
+    private String name;
+    
+   
+    @ManyToOne
+    @JoinColumn(name = "region_Id")
+    private Region region;
 
-    public Region(int int1, String string) {
+    // Set<RelationRegDiv> relations;
+
+    public void setId(Integer id){
+        this.id = id;
     }
-    public int getDivisionId(){
-        return this.divisionId;
+
+    public int getId(){
+        return id;
     }
-    public void setDivisionId(int divisionId){
-        this.divisionId = divisionId;
+
+    public void setName(String name){
+        this.name = name;
     }
-    public String getDivisionName(){
-        return this.divisionName;
+
+    public String getName(){
+        return name;
     }
-    public void setDivisionName(String divisionName){
-        this.divisionName = divisionName;
+    public void setRegion(Region region){
+        this.region = region;
     }
-    public int getRegionId(){
-        return this.regionId
+    public Region getRegion(){
+        return region;
     }
-    public void setRegionId(int regionId){
-        this.regionId = regionId;
-    }
+
 }
