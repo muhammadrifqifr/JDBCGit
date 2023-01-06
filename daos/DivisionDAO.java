@@ -17,7 +17,7 @@ public class DivisionDAO {
 
     public List<Division> getAll(){
         List<Division> divisions = new ArrayList<>();
-        String query = "SELECT * FROM tb_m_division"; 
+        String query = "SELECT * FROM tb_m_division JOIN tb_m_region ON tb_m_division.regionId = tb_m_region.id"; 
         try {
             ResultSet resultSet = con.prepareStatement(query).executeQuery(); 
             while (resultSet.next()){
@@ -26,9 +26,9 @@ public class DivisionDAO {
                 division.setId(resultSet.getInt(1));
                 division.setName(resultSet.getString(2));
                 division.setRegion(region);
-                region.setName(resultSet.getString(3));
+                region.setId(resultSet.getInt(3));
+                region.setName(resultSet.getString(5));
                 divisions.add(division);
-                //System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2));
             }
         } catch (Exception e){
             e.printStackTrace();
