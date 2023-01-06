@@ -11,12 +11,11 @@ public class Division {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    
     @Column(name = "name", nullable = false)
     private String name;
     
     @ManyToOne
-    @JoinColumn(name = "regionId", referencedColumnName = "id")
+    @JoinColumn(name = "regionId")
     private Region region;
 
     public void setId(Integer id){
