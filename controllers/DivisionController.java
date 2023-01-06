@@ -17,10 +17,6 @@ public class DivisionController {
     // GET ALL
     @GetMapping
     public String index(Model model){
-        Division division = new Division();
-        division.setId(3);
-        division.setName("Sport");
-        division.setRegion();
         model.addAttribute( "divisions", divisionDAO.getAll());
         return "division/index";
     }
