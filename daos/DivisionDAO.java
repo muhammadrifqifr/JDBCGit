@@ -38,7 +38,7 @@ public class DivisionDAO {
 
 
 // // Get by ID
-    public Division getById(int id){
+    public Division getById(Integer id){
         String query = "SELECT * FROM tb_m_division WHERE Id = ?";
         Division division = new Division();
         try {
@@ -58,10 +58,10 @@ public class DivisionDAO {
     //Insert
     public boolean insert(Division division){
         try {
-             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tb_m_division(name) VALUES(?)");
+             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tb_m_division(name, regionId) VALUES (?,?)");
              //preparedStatement.setInt(1, division.getId());
              preparedStatement.setString(1, division.getName());
-             //preparedStatement.setInt(3, division.getRegionId());
+             preparedStatement.setInt(2, division.getRegion().getId());
              int temp = preparedStatement.executeUpdate();
              //System.out.println("Insert Data Division Success");
              return temp > 0;
@@ -74,11 +74,11 @@ public class DivisionDAO {
     //Update
     public boolean update(Division division){
         try {
-            String query = "UPDATE tb_m_division SET id = ?, name = ? WHERE Id = ?";
+            String query = "UPDATE tb_m_division SET name = ?, regionId = ? WHERE Id = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
-            preparedStatement.setInt(1, division.getId());
-            preparedStatement.setString(2, division.getnName());
-            preparedStatement.setInt(3, division.getRegionId());
+            //preparedStatement.setInt(1, division.getId());
+            preparedStatement.setString(1, division.getName());
+            preparedStatement.setInt(2, division.getRegion().getId());
             preparedStatement.setInt(3, division.getId());
             int temp = preparedStatement.executeUpdate();
             return temp > 0;
@@ -98,10 +98,10 @@ public class DivisionDAO {
             return temp > 0;
         } catch (SQLException e){
              e.printStackTrace();
-         }
-         return false;
+        }
+        return false;
     }
-
+}
 	// public Object getConnection() {
 	// 	return null;
 	// }
